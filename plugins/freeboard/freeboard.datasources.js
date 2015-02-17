@@ -502,7 +502,7 @@ freeboard.loadDatasourcePlugin({
 		// **type_name** (required) : A unique name for this plugin. This name should be as unique as possible to avoid collisions with other plugins, and should follow naming conventions for javascript variable and function declarations.
 		"type_name"   : "meshblu",
 		// **display_name** : The pretty name that will be used for display purposes for this plugin. If the name is not defined, type_name will be used instead.
-		"display_name": "Octoblu datasource",
+		"display_name": "Octoblu",
         // **description** : A description of the plugin. This description will be displayed when the plugin is selected or within search results (in the future). The description may contain HTML if needed.
         "description" : "app.octoblu.com",
 		// **external_scripts** : Any external scripts that should be loaded before the plugin instance is created.
@@ -519,7 +519,7 @@ freeboard.loadDatasourcePlugin({
 				// **type** (required) : The type of input expected for this setting. "text" will display a single text box input. Examples of other types will follow in this documentation.
 				"type"         : "text",
 				// **default_value** : A default value for this setting.
-				"default_value": "uuuuid",
+				"default_value": "device uuid",
 				// **description** : Text that will be displayed below the setting to give the user any extra information.
 				"description"  : "your device UUID",
                 // **required** : Set to true if this setting is required for the datasource to be created.
@@ -533,9 +533,37 @@ freeboard.loadDatasourcePlugin({
 				// **type** (required) : The type of input expected for this setting. "text" will display a single text box input. Examples of other types will follow in this documentation.
 				"type"         : "text",
 				// **default_value** : A default value for this setting.
-				"default_value": "toooken",
+				"default_value": "device token",
 				// **description** : Text that will be displayed below the setting to give the user any extra information.
 				"description"  : "your device TOKEN",
+                // **required** : Set to true if this setting is required for the datasource to be created.
+                "required" : true
+			},
+			{
+				// **name** (required) : The name of the setting. This value will be used in your code to retrieve the value specified by the user. This should follow naming conventions for javascript variable and function declarations.
+				"name"         : "server",
+				// **display_name** : The pretty name that will be shown to the user when they adjust this setting.
+				"display_name" : "Server",
+				// **type** (required) : The type of input expected for this setting. "text" will display a single text box input. Examples of other types will follow in this documentation.
+				"type"         : "text",
+				// **default_value** : A default value for this setting.
+				"default_value": "meshblu.octoblu.com",
+				// **description** : Text that will be displayed below the setting to give the user any extra information.
+				"description"  : "your server",
+                // **required** : Set to true if this setting is required for the datasource to be created.
+                "required" : true
+			},
+			{
+				// **name** (required) : The name of the setting. This value will be used in your code to retrieve the value specified by the user. This should follow naming conventions for javascript variable and function declarations.
+				"name"         : "port",
+				// **display_name** : The pretty name that will be shown to the user when they adjust this setting.
+				"display_name" : "Port",
+				// **type** (required) : The type of input expected for this setting. "text" will display a single text box input. Examples of other types will follow in this documentation.
+				"type"         : "number",
+				// **default_value** : A default value for this setting.
+				"default_value": 80,
+				// **description** : Text that will be displayed below the setting to give the user any extra information.
+				"description"  : "server port",
                 // **required** : Set to true if this setting is required for the datasource to be created.
                 "required" : true
 			}
@@ -565,7 +593,7 @@ freeboard.loadDatasourcePlugin({
 		// Good idea to create a variable to hold on to our settings, because they might change in the future. See below.
 		var currentSettings = settings;
 
-			
+		
 
 		/* This is some function where I'll get my data from somewhere */
 
@@ -576,7 +604,9 @@ freeboard.loadDatasourcePlugin({
 
 		 var conn = skynet.createConnection({
     		"uuid": currentSettings.uuid,
-    		"token": currentSettings.token
+    		"token": currentSettings.token,
+    		"server": currentSettings.server, 
+    		"port": currentSettings.port
   				});	
 			 
 			 conn.on('ready', function(data){	
@@ -587,8 +617,6 @@ freeboard.loadDatasourcePlugin({
     				updateCallback(newData);
 
  						 });
-
-			 	
 
 			 });
 			}
@@ -612,9 +640,8 @@ freeboard.loadDatasourcePlugin({
 		// **onDispose()** (required) : A public function we must implement that will be called when this instance of this plugin is no longer needed. Do anything you need to cleanup after yourself here.
 		self.onDispose = function()
 		{
-			// Probably a good idea to get rid of our timer.
-		//	clearInterval(refreshTimer);
-		//	refreshTimer = undefined;
+		
+			//conn.close();
 		}
 
 		// Here we call createRefreshTimer with our current settings, to kick things off, initially. Notice how we make use of one of the user defined settings that we setup earlier.
