@@ -1,5 +1,18 @@
 # Octoblu Usage
 
+##Using freeboard.io service w/ Octoblu plugin
+1. Create freeboard account
+2. Create new freeboard
+3. On the bottom right click "DEVELOPER CONSOLE"
+4. Add this link https://s3-us-west-2.amazonaws.com/octoblu.com/meshblu_frb.js
+5. Create a new datasource, the Octoblu plugin should now be available.
+6. Create a generic device in Octoblu using the Things page.
+7. Use the UUID/TOKEN for the datasource configuration
+8. In the flow designer, drop the freeboard node in and set it to forward message.
+Any data sent to that device will be available in freeboard via the datasource.
+
+##HOST YOU OWN FREEBOARD
+
 1. Clone the repo
 2. Open index.html in a browser.
 3. In app.octoblu.com create a Generic Device through the Connect page. 
