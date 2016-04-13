@@ -26,7 +26,7 @@
         "description" : "app.octoblu.com",
 		// **external_scripts** : Any external scripts that should be loaded before the plugin instance is created.
 		"external_scripts" : [
-			"http://meshblu.octoblu.com/js/meshblu.js"
+			"https://cdn.octoblu.com/js/meshblu/latest/meshblu.bundle.js"
 		],
 		// **settings** : An array of settings that will be displayed for this plugin when the user adds it.
 		"settings"    : [
