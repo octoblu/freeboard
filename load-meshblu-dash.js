@@ -15,17 +15,43 @@ var conn = meshblu.createConnection({
   "token": GET.token
 });
 
+console.log(freeboard.datasourceData);
 conn.on('ready', function(data){
 
   conn.whoami({}, function(result){
-    freeboard.loadDashboard(result.freeboardDash, function() {
-      freeboard.setEditing(false);
-    });
+    if(!result.freeboardDash){
+      var config = {
+          "version": 1,
+          "allow_edit": true,
+          "plugins": [],
+          "panes": [],
+          "datasources": [
+            {
+              "name": "Main",
+              "type": "meshblu",
+              "settings": {
+                "uuid": GET.uuid,
+                "token": GET.token,
+                "server": "meshblu.octoblu.com",
+                "port": 443
+              }
+            }
+          ],
+          "columns": 3
+        };
+      conn.update({
+        "uuid": GET.uuid,
+        "freeboardDash": config
+      });
+      freeboard.loadDashboard(config, function() {
+        freeboard.setEditing(false);
+      });
+    }else{
+      freeboard.loadDashboard(result.freeboardDash, function() {
+        freeboard.setEditing(false);
+      });
+    }
   });
-
-  conn.on('message', function(message){
-  });
-
 });
 
 var saveMeshbluDashboard = function(){

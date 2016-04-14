@@ -299,6 +299,21 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		});
 	}
 
+	this.cheat = function(name, newData)
+	{
+		var datasourceName = name;
+
+		self.datasourceData[datasourceName] = newData;
+
+		_.each(self.panes(), function(pane)
+		{
+			_.each(pane.widgets(), function(widget)
+			{
+				widget.processDatasourceUpdate(datasourceName);
+			});
+		});
+	}
+
 	this._datasourceTypes = ko.observable();
 	this.datasourceTypes = ko.computed({
 		read: function()
@@ -2295,6 +2310,8 @@ function WidgetModel(theFreeboardModel, widgetPlugins) {
 
 	}
 
+
+
 	this.serialize = function () {
 		return {
 			title: self.title(),
@@ -2811,6 +2828,10 @@ var freeboard = (function()
 		serialize           : function()
 		{
 			return theFreeboardModel.serialize();
+		},
+		updateData : function(name, data)
+		{
+			return theFreeboardModel.cheat(name, data);
 		},
 		setEditing          : function(editing, animate)
 		{
