@@ -541,6 +541,7 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		var blob = new Blob([JSON.stringify(self.serialize())], {'type': contentType});
 		document.body.appendChild(a);
 		a.href = window.URL.createObjectURL(blob);
+		console.log(blob);
 		a.download = "dashboard.json";
 		a.target="_self";
 		a.click();
@@ -808,7 +809,7 @@ function FreeboardUI()
 
 		if(newCols === grid.cols)
 		{
-			return false; 
+			return false;
 		}
 		else
 		{
@@ -1642,7 +1643,7 @@ PluginEditor = function(jsEditor, valueEditor)
 		new DialogBox(form, title, "Save", "Cancel", function()
 		{
 			$(".validation-error").remove();
-	
+
 			// Loop through each setting and validate it
 			for(var index = 0; index < selectedType.settings.length; index++)
 			{

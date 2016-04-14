@@ -808,7 +808,7 @@ function FreeboardUI()
 
 		if(newCols === grid.cols)
 		{
-			return false; 
+			return false;
 		}
 		else
 		{
@@ -1642,7 +1642,7 @@ PluginEditor = function(jsEditor, valueEditor)
 		new DialogBox(form, title, "Save", "Cancel", function()
 		{
 			$(".validation-error").remove();
-	
+
 			// Loop through each setting and validate it
 			for(var index = 0; index < selectedType.settings.length; index++)
 			{

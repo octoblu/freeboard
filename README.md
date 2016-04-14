@@ -14,14 +14,15 @@ Any data sent to that device will be available in freeboard via the datasource.
 ##HOST YOU OWN FREEBOARD
 
 1. Clone the repo
-2. Open index.html in a browser.
-3. In app.octoblu.com create a Generic Device through the Connect page. 
-4. Click on Add Data Source
-5. Enter your Generic Device's UUID and TOKEN (you can get this from the connect page)
-6. Save this data source.
-7. Click Add Pane
-8. Clicking on +datasource anywhere will let you select that datasource, any data sent to that datasource as JSON will appear as selectable key values that you can drop into this pane's assignable values.
-9. Save your freeboard dashboard as a json file from the top left menu. This way you can load it back in later on. Save it as dashboard.json to the folder where index.html is for it to autoload.
+2. In app.octoblu.com create a Generic Device through the Connect page.
+2. Open index.html?uuid=your-uuid&token=your-token in a browser using the credentials from prev step.
+4. In app.octoblu.com create a Generic Device through the Connect page.
+5. Click on Add Data Source
+6. Enter your Generic Device's UUID and TOKEN (you can get this from the connect page)
+7. Save this data source.
+8. Click Add Pane
+9. Clicking on +datasource anywhere will let you select that datasource, any data sent to that datasource as JSON will appear as selectable key values that you can drop into this pane's assignable values.
+10. To save, press Save Dashboard, this will update the device that acts as your freeboard from step 1.
 
 ==========
 ==========
@@ -196,6 +197,6 @@ $(function()
 });
 ```
 
-### Copyright 
+### Copyright
 
 Copyright © 2013 Jim Heising (https://github.com/jheising)<br/>Copyright © 2013 Bug Labs, Inc. (http://buglabs.net)<br/>Licensed under the **MIT** license.
